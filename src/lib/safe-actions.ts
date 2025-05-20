@@ -1,4 +1,3 @@
-import { env } from '@/env'
 import { PublicError, AuthenticationError } from '@/use-cases/errors'
 import { createServerActionProcedure } from 'zsa'
 
@@ -7,7 +6,7 @@ import { auth } from '@/lib/auth'
 function shapeErrors({ err }: { err: unknown }) {
   const isAllowedError = err instanceof PublicError
   // let's all errors pass through to the UI so debugging locally is easier
-  const isDev = env.NODE_ENV === 'development'
+  const isDev = process.env.NODE_ENV === 'development'
   if (isAllowedError || isDev) {
     console.error(err)
     return {
